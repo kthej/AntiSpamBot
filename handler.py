@@ -9,7 +9,7 @@ import json
 
 API_ROOT = 'https://api.groupme.com/v3/'
 FLAGGED_PHRASES = (
-    'hentai',
+    
     "selling roc pass",
     "selling my roc pass",
     "selling the roc pass",
@@ -21,6 +21,7 @@ FLAGGED_PHRASES = (
     "roc pass available",
     "selling my roc",
     "selling roc",
+    ""
 )
 
 
