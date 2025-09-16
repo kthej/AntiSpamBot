@@ -20,7 +20,8 @@ FLAGGED_PHRASES = (
     "roc pass available",
     "selling my roc",
     "selling roc",
-    "roc pass"
+    "roc pass",
+    "kick me!"
 )
 
 # Load your GroupMe token from environment variable
@@ -63,7 +64,7 @@ def receive(event, context):
             # Attempt to kick the user using environment token
             if kick_user(message['group_id'], message['user_id']):
                 delete_message(message['group_id'], message['id'])
-                send(f'Kicked {message.get("name", "user")} due to apparent spam post.', bot_id)
+                send(f'Kicked {message.get("name", "user")} due to potential spam. If this is a mistake, please DM the admins.', bot_id)
             else:
                 print('Kick attempt failed or user is an admin.')
             break
