@@ -39,21 +39,21 @@ def get_membership_id(group_id, user_id):
             return membership['id']
     return None
 
-def remove_member(group_id, membership_id):
-    response = requests.post(f'{API_ROOT}groups/{group_id}/members/{membership_id}/remove', params={'token': GROUPME_TOKEN})
-    print('Attempted to kick user, got response:')
-    print(response.text)
-    return response.ok
+# def remove_member(group_id, membership_id):
+#     response = requests.post(f'{API_ROOT}groups/{group_id}/members/{membership_id}/remove', params={'token': GROUPME_TOKEN})
+#     print('Attempted to kick user, got response:')
+#     print(response.text)
+#     return response.ok
 
 def delete_message(group_id, message_id):
     response = requests.delete(f'{API_ROOT}conversations/{group_id}/messages/{message_id}', params={'token': GROUPME_TOKEN})
     return response.ok
 
-def kick_user(group_id, user_id):
-    membership_id = get_membership_id(group_id, user_id)
-    if membership_id:
-        return remove_member(group_id, membership_id)
-    return False
+# def kick_user(group_id, user_id):
+#     membership_id = get_membership_id(group_id, user_id)
+#     if membership_id:
+#         return remove_member(group_id, membership_id)
+#     return False
 
 def receive(event, context):
     message = json.loads(event['body'])
@@ -62,9 +62,9 @@ def receive(event, context):
     for phrase in FLAGGED_PHRASES:
         if phrase in (message.get('text') or '').lower():
             # Attempt to kick the user using environment token
-            if kick_user(message['group_id'], message['user_id']):
+            if delete_message(message['group_id'], message['message_id']):
                 delete_message(message['group_id'], message['id'])
-                send(f'Kicked {message.get("name", "user")} due to potential spam. If this is a mistake, please DM the admins.', bot_id)
+                send(f'Deleted {message.get("name", "user")}'s post due to potential spam. If this is a mistake, please DM the admins.', bot_id)
             else:
                 print('Kick attempt failed or user is an admin.')
             break
