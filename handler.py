@@ -20,7 +20,6 @@ FLAGGED_PHRASES = (
     "roc pass available",
     "selling my roc",
     "selling roc",
-    "roc pass",
     "kick me!"
 )
 
