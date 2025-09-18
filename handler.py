@@ -20,7 +20,11 @@ FLAGGED_PHRASES = (
     "roc pass available",
     "selling my roc",
     "selling roc",
-    "kick me!"
+    "kick me!",
+    "I am selling",
+    "I'm selling",
+    "i am selling",
+    "DM if interested"
 )
 
 # Load your GroupMe token from environment variable
